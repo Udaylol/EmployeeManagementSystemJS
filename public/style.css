@@ -44,6 +44,40 @@ body {
     gap: 0.5rem;
 }
 
+/* Dashboard Toggle Buttons */
+.dashboard-toggle {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.toggle-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.toggle-btn.active {
+    background: white;
+    color: #667eea;
+    border-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
 .header-actions {
     display: flex;
     gap: 1rem;
@@ -56,6 +90,27 @@ body {
     margin: 0 auto;
     padding: 2rem;
     width: 100%;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.dashboard-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Stats Grid */
@@ -421,6 +476,17 @@ body {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+    }
+
+    .dashboard-toggle {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .toggle-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
     }
 
     .dashboard-main {
