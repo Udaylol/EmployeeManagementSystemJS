@@ -7,27 +7,43 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to BEE Project</h1>
+    <div class="container landing">
+        <div class="brand-header">
+            <img src="https://img.icons8.com/fluency/48/bee.png" alt="Bee Logo" class="bee-logo">
+            <h1>BEE Project</h1>
+            <p class="subtitle">Effortless Employee Management</p>
+        </div>
         <div class="toggle-buttons">
             <button id="showLogin" class="active">Login</button>
             <button id="showSignup">Sign Up</button>
         </div>
         <div class="auth-forms">
             <div class="form-container" id="loginContainer">
-                <h2>Login</h2>
+                <h2>Login to your account</h2>
                 <form id="loginForm">
-                    <input type="text" name="loginUsername" placeholder="Username" required>
-                    <input type="password" name="loginPassword" placeholder="Password" required>
+                    <div class="input-group">
+                        <label for="loginUsername">Username</label>
+                        <input type="text" name="loginUsername" id="loginUsername" placeholder="Enter your username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" name="loginPassword" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
                     <button type="submit">Login</button>
                 </form>
                 <div id="loginMessage"></div>
             </div>
             <div class="form-container" id="signupContainer" style="display:none;">
-                <h2>Sign Up</h2>
+                <h2>Create a new account</h2>
                 <form id="signupForm">
-                    <input type="text" name="signupUsername" placeholder="Username" required>
-                    <input type="password" name="signupPassword" placeholder="Password" required>
+                    <div class="input-group">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" name="signupUsername" id="signupUsername" placeholder="Choose a username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" name="signupPassword" id="signupPassword" placeholder="Create a password" required>
+                    </div>
                     <button type="submit">Sign Up</button>
                 </form>
                 <div id="signupMessage"></div>
