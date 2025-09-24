@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { authenticate, signAuthToken } = require('./middlewares/auth');
+const employeeRoutes = require('./routes/employeeRoutes');
 const User = require('./models/User');
 const app = express();
 const port = 3000;
@@ -19,6 +20,7 @@ mongoose
     console.error('MongoDB connection error:', err.message);
     process.exit(1);
   });
+  
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve landing page
@@ -81,6 +83,9 @@ app.post('/logout', (req, res) => {
   res.clearCookie('token');
   return res.json({ message: 'Logged out' });
 });
+
+// Employee CRUD routes (protected)
+app.use('/api/employees', employeeRoutes);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
