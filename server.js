@@ -4,10 +4,12 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { authenticate, signAuthToken } = require('./middlewares/auth');
 const employeeRoutes = require('./routes/employeeRoutes');
-const User = require('./models/User');
+const adminRoutes = require('./routes/adminRoutes');
+const Admin = require('./models/Admin');
 const app = express();
 const port = 3000;
 
+// User
 app.use(express.json());
 app.use(cookieParser());
 
@@ -35,11 +37,11 @@ app.post('/signup', async (req, res) => {
     return res.json({ message: 'Username and password required.' });
   }
   try {
-    const existing = await User.findOne({ username });
+    const existing = await Admin.findOne({ username });
     if (existing) {
       return res.json({ message: 'Username is already taken' });
     }
-    await User.create({ username, password });
+    await Admin.create({ username, password });
     return res.json({ message: 'Signup successful! You can now log in.' });
   } catch (err) {
     console.error('Signup error:', err.message);
@@ -55,11 +57,11 @@ app.post('/login', async (req, res) => {
     return res.json({ message: 'Username and password required.' });
   }
   try {
-    const user = await User.findOne({ username });
-    if (!user || user.password !== password) {
+    const admin = await Admin.findOne({ username });
+    if (!admin || admin.password !== password) {
       return res.json({ message: 'Invalid username or password.' });
     }
-    const token = signAuthToken({ id: user._id, username: user.username });
+    const token = signAuthToken({ id: admin._id, username: admin.username });
     res.cookie('token', token, {
       httpOnly: true,
       sameSite: 'lax',
@@ -86,6 +88,8 @@ app.post('/logout', (req, res) => {
 
 // Employee CRUD routes (protected)
 app.use('/api/employees', employeeRoutes);
+// Admin CRUD routes (protected)
+app.use('/api/admins', adminRoutes);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
