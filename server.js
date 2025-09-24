@@ -30,26 +30,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Signup endpoint
-app.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    return res.json({ message: 'Username and password required.' });
-  }
-  try {
-    const existing = await Admin.findOne({ username });
-    if (existing) {
-      return res.json({ message: 'Username is already taken' });
-    }
-    await Admin.create({ username, password });
-    return res.json({ message: 'Signup successful! You can now log in.' });
-  } catch (err) {
-    console.error('Signup error:', err.message);
-    return res.json({ message: 'An error occurred. Please try again.' });
-  }
-});
-
-
 // Login endpoint
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
