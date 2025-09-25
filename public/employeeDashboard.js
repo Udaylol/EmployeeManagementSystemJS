@@ -85,7 +85,7 @@
     const avgSalary = total > 0 ? employees.reduce((sum, e) => sum + e.salary, 0) / total : 0;
     const uniqueRoles = new Set(employees.map((e) => e.role)).size;
     totalEmployeesEl.textContent = total;
-    avgSalaryEl.textContent = '$' + avgSalary.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    avgSalaryEl.textContent = '₹' + avgSalary.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     totalRolesEl.textContent = uniqueRoles;
   }
 
@@ -145,7 +145,7 @@
           </td>
           <td>${employee.email}</td>
           <td><span style="background: #e0f2fe; color: #0369a1; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">${employee.role}</span></td>
-          <td style="font-weight: 600; color: #059669;">$${employee.salary.toLocaleString('en-US')}</td>
+          <td style="font-weight: 600; color: #059669;">₹${employee.salary.toLocaleString('en-IN')}</td>
           <td>
             <div class="employee-actions">
               <button data-id="${employee._id}" class="btn btn-sm btn-outline employee-edit" title="Edit"><i class="fas fa-edit"></i></button>

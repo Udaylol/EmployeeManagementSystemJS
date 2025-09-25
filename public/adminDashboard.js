@@ -34,23 +34,49 @@
   }
 
   function setupAdminEventListeners() {
-    if (adminSearchInput) adminSearchInput.addEventListener('input', filterAdmins);
-    if (refreshAdminsBtn) refreshAdminsBtn.addEventListener('click', loadAdmins);
-    if (addAdminBtn) addAdminBtn.addEventListener('click', openAddAdminModal);
+    // Remove any existing event listeners first to prevent duplicates
+    if (adminSearchInput) {
+      adminSearchInput.removeEventListener('input', filterAdmins);
+      adminSearchInput.addEventListener('input', filterAdmins);
+    }
+    if (refreshAdminsBtn) {
+      refreshAdminsBtn.removeEventListener('click', loadAdmins);
+      refreshAdminsBtn.addEventListener('click', loadAdmins);
+    }
+    if (addAdminBtn) {
+      addAdminBtn.removeEventListener('click', openAddAdminModal);
+      addAdminBtn.addEventListener('click', openAddAdminModal);
+    }
 
-    document.querySelectorAll('.close').forEach((btn) => btn.addEventListener('click', closeAdminModals));
-    window.addEventListener('click', (e) => {
-      if (e.target === adminModal || e.target === deleteModal) {
-        closeAdminModals();
-      }
+    document.querySelectorAll('.close').forEach((btn) => {
+      btn.removeEventListener('click', closeAdminModals);
+      btn.addEventListener('click', closeAdminModals);
     });
-    if (adminForm) adminForm.addEventListener('submit', handleAdminFormSubmit);
+    window.removeEventListener('click', handleWindowClick);
+    window.addEventListener('click', handleWindowClick);
+    
+    if (adminForm) {
+      adminForm.removeEventListener('submit', handleAdminFormSubmit);
+      adminForm.addEventListener('submit', handleAdminFormSubmit);
+    }
 
     const cancelAdminBtn = document.getElementById('cancelAdminBtn');
-    if (cancelAdminBtn) cancelAdminBtn.addEventListener('click', closeAdminModals);
+    if (cancelAdminBtn) {
+      cancelAdminBtn.removeEventListener('click', closeAdminModals);
+      cancelAdminBtn.addEventListener('click', closeAdminModals);
+    }
 
     const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-    if (confirmDeleteBtn) confirmDeleteBtn.addEventListener('click', confirmAdminDelete);
+    if (confirmDeleteBtn) {
+      confirmDeleteBtn.removeEventListener('click', confirmAdminDelete);
+      confirmDeleteBtn.addEventListener('click', confirmAdminDelete);
+    }
+  }
+
+  function handleWindowClick(e) {
+    if (e.target === adminModal || e.target === deleteModal) {
+      closeAdminModals();
+    }
   }
 
   async function loadAdmins() {
@@ -142,8 +168,15 @@
     deleteModal.style.display = 'block';
   }
 
+  let isSubmitting = false;
+
   async function handleAdminFormSubmit(e) {
     e.preventDefault();
+    
+    // Prevent multiple submissions
+    if (isSubmitting) return;
+    isSubmitting = true;
+    
     const formData = new FormData(adminForm);
     const payload = {
       username: formData.get('username'),
@@ -178,6 +211,7 @@
       showToast('Error saving admin: ' + error.message, 'error');
     } finally {
       showLoading(false);
+      isSubmitting = false; // Reset the flag
     }
   }
 

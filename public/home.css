@@ -296,12 +296,12 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.employee-table {
+.employee-table, .admin-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.employee-table th {
+.employee-table th, .admin-table th {
     background: #f8fafc;
     padding: 1rem;
     text-align: left;
@@ -310,12 +310,12 @@ body {
     border-bottom: 2px solid #e5e7eb;
 }
 
-.employee-table td {
+.employee-table td, .admin-table td {
     padding: 1rem;
     border-bottom: 1px solid #e5e7eb;
 }
 
-.employee-table tr:hover {
+.employee-table tr:hover, .admin-table tr:hover {
     background: #f8fafc;
 }
 
@@ -389,7 +389,7 @@ body {
 }
 
 /* Form */
-#employeeForm {
+#employeeForm, #adminForm {
     padding: 1.5rem;
 }
 
@@ -506,7 +506,7 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .employee-table {
+    .employee-table, .admin-table {
         font-size: 0.875rem;
     }
 
@@ -518,163 +518,4 @@ body {
         margin: 10% auto;
         width: 95%;
     }
-}
-
-/* Landing Page Styles (for index.html) */
-
-/* Landing Page Enhancements */
-.container.landing {
-    max-width: 420px;
-    margin: 60px auto;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 6px 32px rgba(80, 80, 180, 0.10), 0 1.5px 6px rgba(0,0,0,0.04);
-    padding: 36px 28px 32px 28px;
-    position: relative;
-    overflow: hidden;
-    animation: fadeIn 0.7s cubic-bezier(.4,0,.2,1);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.brand-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 18px;
-}
-.bee-logo {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 6px;
-}
-.brand-header h1 {
-    font-size: 2.1rem;
-    font-weight: 700;
-    color: #22223b;
-    margin-bottom: 2px;
-    letter-spacing: 1px;
-}
-.subtitle {
-    color: #6c63ff;
-    font-size: 1.05rem;
-    margin-bottom: 8px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
-
-/* Toggle buttons */
-
-.toggle-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    margin-top: 18px;
-    margin-bottom: 8px;
-    border-radius: 8px 8px 0 0;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(80,80,180,0.07);
-}
-.toggle-buttons button {
-    flex: 1;
-    padding: 12px 0;
-    border: none;
-    background: #f3f4f6;
-    color: #444;
-    font-size: 1.08rem;
-    font-weight: 500;
-    cursor: pointer;
-    outline: none;
-    transition: background 0.2s, color 0.2s;
-    border-bottom: 2.5px solid transparent;
-}
-.toggle-buttons button.active {
-    background: #6c63ff;
-    color: #fff;
-    border-bottom: 2.5px solid #22223b;
-    z-index: 1;
-}
-
-
-.auth-forms {
-    display: flex;
-    justify-content: center;
-    margin-top: 0;
-}
-
-.form-container {
-    width: 100%;
-    background: #f7f7fb;
-    border-radius: 12px;
-    padding: 28px 22px 18px 22px;
-    max-width: 350px;
-    box-shadow: 0 1.5px 8px rgba(80,80,180,0.07);
-    margin-top: 0;
-    animation: fadeIn 0.5s cubic-bezier(.4,0,.2,1);
-}
-
-.form-container h2 {
-    text-align: center;
-    color: #6c63ff;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 18px;
-    letter-spacing: 0.5px;
-}
-
-.input-group {
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-}
-.input-group label {
-    font-size: 0.98rem;
-    color: #444;
-    margin-bottom: 5px;
-    font-weight: 500;
-    letter-spacing: 0.2px;
-}
-.input-group input[type="text"],
-.input-group input[type="password"] {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1.5px solid #d1d5db;
-    border-radius: 5px;
-    font-size: 1rem;
-    background: #fff;
-    transition: border 0.2s;
-}
-.input-group input[type="text"]:focus,
-.input-group input[type="password"]:focus {
-    border: 1.5px solid #6c63ff;
-    outline: none;
-}
-
-.form-container button[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(90deg, #6c63ff 60%, #48b1f3 100%);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.08rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 6px;
-    box-shadow: 0 1px 4px rgba(80,80,180,0.07);
-    transition: background 0.2s;
-}
-.form-container button[type="submit"]:hover {
-    background: linear-gradient(90deg, #48b1f3 0%, #6c63ff 100%);
-}
-
-#loginMessage, #signupMessage {
-    margin-top: 12px;
-    color: #d8000c;
-    min-height: 20px;
-    text-align: center;
-    font-size: 0.98rem;
 }
