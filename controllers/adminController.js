@@ -11,7 +11,8 @@ async function createAdmin(req, res) {
       return res.status(409).json({ message: 'Admin with this username already exists' });
     }
     const admin = await Admin.create({ username, password });
-    return res.status(201).json({ message: 'Admin created successfully', admin: { id: admin._id, username: admin.username } });
+    const adminResponse = await Admin.findById(admin._id).select('-password');
+    return res.status(201).json(adminResponse);
   } catch (err) {
     return res.status(500).json({ message: 'Server error' });
   }
@@ -28,7 +29,7 @@ async function listAdmins(req, res) {
 
 async function getAdminById(req, res) {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
     const admin = await Admin.findById(id).select('-password');
     if (!admin) return res.status(404).json({ message: 'Admin not found' });
     return res.json(admin);
