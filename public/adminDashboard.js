@@ -1,6 +1,4 @@
-// Admin Dashboard JavaScript (modular)
 (function() {
-  // State
   let admins = [];
   let filteredAdmins = [];
   let currentAdminId = null;

@@ -1,21 +1,19 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_change_me';
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-change-in-production';
 
-function signAuthToken(payload, options = {}) {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '1h', ...options });
+function signAuthToken(payload) {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 }
 
 function authenticate(req, res, next) {
-  const token = req.cookies && req.cookies.token;
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
+  const token = req.cookies?.token;
+  if (!token) return res.status(401).json({ message: 'Unauthorized' });
+  
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.admin = decoded;
-    return next();
-  } catch (err) {
+    req.admin = jwt.verify(token, JWT_SECRET);
+    next();
+  } catch {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 }
