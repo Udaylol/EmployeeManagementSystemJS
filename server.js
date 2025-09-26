@@ -12,12 +12,12 @@ const { connectDB } = require("./utils/utils");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-const DATABASE_URL = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/managely";
+const DATABASE_URL = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/managely";
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static(path.join(__dirname, "public")));
 
 connectDB(DATABASE_URL);
@@ -43,7 +43,8 @@ app.post("/login", async (req, res) => {
     if (!admin || admin.password !== password) {
       return res.json({ message: "Invalid username or password." });
     }
-    const token = signAuthToken({ id: admin._id, username: admin.username });
+    const payload = { id: admin._id, username: admin.username };
+    const token = signAuthToken(payload);
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "lax",

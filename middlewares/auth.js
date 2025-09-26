@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 function signAuthToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });

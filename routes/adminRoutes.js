@@ -2,8 +2,11 @@ const express = require('express');
 const { authenticate } = require('../middlewares/auth');
 const adminController = require('../controllers/adminController');
 
+/*
+ route for /api/admins
+*/
 const router = express.Router();
-// requests coming to /api/admins will be handled here
+
 router.post('/', authenticate, adminController.createAdmin);
 router.get('/', authenticate, adminController.listAdmins);
 router.get('/:id', authenticate, adminController.getAdminById);
